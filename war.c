@@ -57,14 +57,16 @@ int main() {
     // - Define a cor do jogador e sorteia sua missão secreta.
 
     struct war territorio[NUM_TER];
+    int j=1;
 
-    printf("=================================");
-    printf("Cadastro dos 5 territorios");
-    printf("=================================\n");
+    printf("\n========================================\n");
+    printf("\tCADASTRO DOS 5 TERRITORIOS\n");
+    printf("=========================================\n");
 
-    for(i = 0; i < NUM_TER; i++)
+    for(int i = 0; i < NUM_TER; i++)
     {
-        printf("Nome do territorio: ");
+        printf("--> TERRITORIO %d", j);
+        printf("\nNome do territorio: ");
         fgets(territorio[i].nome, TAM_STRING, stdin);
 
         printf("Cor do exercito: ");
@@ -73,9 +75,25 @@ int main() {
         printf("Quantidade de tropas: ");
         scanf("%d", &territorio[i].tropas);
 
-        territorio[i].nome[strcspn(territorio[i].nome, '\n')] = '\0';
-        territorio[i].nome[strcspn(territorio[i].cor, '\n')] = '\0';
+        territorio[i].nome[strcspn(territorio[i].nome, "\n")] = '\0';
+        territorio[i].cor[strcspn(territorio[i].cor, "\n")] = '\0';
         limparBufferEntrada();
+        j++;
+    }
+
+    j=1;
+    //exibindo os territorios
+    printf("\n\n========================================\n");
+    printf("\tMAPA DO MUNDO - ESTADO ATUAL\n");
+    printf("=========================================\n");
+
+    for(i = 0; i < NUM_TER; i++)
+    {
+        printf("TERRITORIO %d:", j);
+        printf("Nome: %s", territorio[i].nome);
+        printf("Dominado por: Exercito %s", territorio[i].cor);
+        printf("Tropas: %d", territorio[i].tropas);
+        printf("\n------------------------------------------------\n");
     }
 
 
