@@ -65,7 +65,7 @@ int main() {
 
     for(int i = 0; i < NUM_TER; i++)
     {
-        printf("--> TERRITORIO %d", j);
+        printf("\n--> TERRITORIO %d", j);
         printf("\nNome do territorio: ");
         fgets(territorio[i].nome, TAM_STRING, stdin);
 
@@ -87,12 +87,12 @@ int main() {
     printf("\tMAPA DO MUNDO - ESTADO ATUAL\n");
     printf("=========================================\n");
 
-    for(i = 0; i < NUM_TER; i++)
+    for(int i = 0; i < NUM_TER; i++)
     {
-        printf("TERRITORIO %d:", j);
-        printf("Nome: %s", territorio[i].nome);
-        printf("Dominado por: Exercito %s", territorio[i].cor);
-        printf("Tropas: %d", territorio[i].tropas);
+        printf("\nTERRITORIO %d\n:", j);
+        printf("Nome: %s\n", territorio[i].nome);
+        printf("Dominado por: Exercito %s\n", territorio[i].cor);
+        printf("Tropas: %d\n", territorio[i].tropas);
         printf("\n------------------------------------------------\n");
     }
 
