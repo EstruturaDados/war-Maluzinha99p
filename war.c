@@ -27,7 +27,7 @@
 
 // --- Estrutura de Dados ---
 // Define a estrutura para um território, contendo seu nome, a cor do exército que o domina e o número de tropas.
-struct territorio
+struct war
 {
     char nome[TAM_STRING];
     char cor[TAM_STRING];
@@ -55,6 +55,29 @@ int main() {
     // - Aloca a memória para o mapa do mundo e verifica se a alocação foi bem-sucedida.
     // - Preenche os territórios com seus dados iniciais (tropas, donos, etc.).
     // - Define a cor do jogador e sorteia sua missão secreta.
+
+    struct war territorio[NUM_TER];
+
+    printf("=================================");
+    printf("Cadastro dos 5 territorios");
+    printf("=================================\n");
+
+    for(i = 0; i < NUM_TER; i++)
+    {
+        printf("Nome do territorio: ");
+        fgets(territorio[i].nome, TAM_STRING, stdin);
+
+        printf("Cor do exercito: ");
+        fgets(territorio[i].cor, TAM_STRING, stdin);
+
+        printf("Quantidade de tropas: ");
+        scanf("%d", &territorio[i].tropas);
+
+        territorio[i].nome[strcspn(territorio[i].nome, '\n')] = '\0';
+        territorio[i].nome[strcspn(territorio[i].cor, '\n')] = '\0';
+        limparBufferEntrada();
+    }
+
 
     // 2. Laço Principal do Jogo (Game Loop):
     // - Roda em um loop 'do-while' que continua até o jogador sair (opção 0) ou vencer.
