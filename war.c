@@ -18,12 +18,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 // --- Constantes Globais ---
 // Definem valores fixos para o número de territórios, missões e tamanho máximo de strings, facilitando a manutenção.
 #define TAM_STRING 50
-#define NUM_TER 5
-
 
 // --- Estrutura de Dados ---
 // Define a estrutura para um território, contendo seu nome, a cor do exército que o domina e o número de tropas.
@@ -46,6 +45,11 @@ void limparBufferEntrada(){
     while((c=getchar()) != '\n' && c != EOF);
 }
 
+void gerarNum()
+{
+    int num1 = 1 + rand() %6;
+    int num2 = 1 + rand() %6;
+}
 // --- Função Principal (main) ---
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
 int main() {
@@ -56,11 +60,18 @@ int main() {
     // - Preenche os territórios com seus dados iniciais (tropas, donos, etc.).
     // - Define a cor do jogador e sorteia sua missão secreta.
 
-    struct war territorio[NUM_TER];
-    int j=1;
+    srand(time(NULL));
+    
+    int terri1 = 0, terri2 = 0, indice = 0, NUM_TER = 0, j = 0, v1 = 0, v2 = 0;
+    struct war *territorio;
+
+    printf("Quantos territorios voce deseja: \n");
+    scanf("%d", &NUM_TER);
+
+    territorio = (struct war*) calloc(NUM_TER, sizeof(struct war));
 
     printf("\n========================================\n");
-    printf("\tCADASTRO DOS 5 TERRITORIOS\n");
+    printf("\tCADASTRO DOS %d TERRITORIOS\n", NUM_TER);
     printf("=========================================\n");
 
     for(int i = 0; i < NUM_TER; i++)
@@ -87,14 +98,28 @@ int main() {
     printf("\tMAPA DO MUNDO - ESTADO ATUAL\n");
     printf("=========================================\n");
 
-    for(int i = 0; i < NUM_TER; i++)
-    {
-        printf("\nTERRITORIO %d\n:", j);
-        printf("Nome: %s\n", territorio[i].nome);
-        printf("Dominado por: Exercito %s\n", territorio[i].cor);
-        printf("Tropas: %d\n", territorio[i].tropas);
-        printf("\n------------------------------------------------\n");
-    }
+    do{
+        for(int i = 0; i < NUM_TER; i++)
+        {
+            printf("%d - %s (Exercito %s, Tropas: %d)\n", i + 1, territorio[i].nome, territorio[i].cor, territorio[i].tropas);
+        }
+
+        printf("----- Fase do Ataque -----");
+
+        printf("Escolha o territorio atacante (1 a 5, ou 0 para sair): %d\n");
+        scanf("%d", &terri1);
+        v1 = 1 + rand() %6;
+
+        printf("Escolha o territorio defensor (1 a 5): %d\n");
+        scanf("%d", &terri2);
+        v2 = 1 + rand() %6;
+
+        printf("O atacante %d rolou o dado e tirou %d\n", territorio[terr1 - 1].nome, v1);
+        printf("O defensor %d rolou o dado e tirou %d\n", territorio[terr2 - 1].nome, v2);
+
+
+    }while(terri1 != 0)
+    
 
 
     // 2. Laço Principal do Jogo (Game Loop):
