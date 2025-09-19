@@ -83,6 +83,17 @@ void inicializarTerritorios(struct war *territorio)
     }
     return 0;
 }
+
+void exibirMapa(struct war *territorio)
+{
+    int j = 1;
+    for(int i = 0; i < NUM_TER; i++)
+    {
+        printf("%d - %s (Exercito: %s, Tropas: %d)\n", j, territorio[i].nome, territorio[i].cor, territorio[i].tropas);
+        j++;
+    }
+    return 0;
+}
 // --- Função Principal (main) ---
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
 int main() {
@@ -101,13 +112,15 @@ int main() {
     printf("\tCADASTRO DOS %d TERRITORIOS\n", NUM_TER);
     printf("=========================================\n");
 
+    inicializarTerritorios(territorio);
     
-    j=1;
     //exibindo os territorios
     printf("\n\n========================================\n");
     printf("\tMAPA DO MUNDO - ESTADO ATUAL\n");
     printf("=========================================\n");
 
+    exibirMapa(territorio);
+    
     do{
         for(int i = 0; i < NUM_TER; i++)
         {
