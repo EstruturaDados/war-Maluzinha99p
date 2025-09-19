@@ -58,6 +58,31 @@ struct war* alocarMapa()
 
      return territorio;
 }
+
+void inicializarTerritorios(struct war *territorio)
+{
+    int j = 1;
+    for(int i = 0, i < NUM_TER; i++)
+    {
+        printf("--> TERRITORIO %d\n", j);
+
+        printf("Nome do territorio: ");
+        fgets(territorio[i].nome, TAM_STRING, stdin);
+
+        printf("\nCor do exercito: ");
+        fgets(territorio[i].cor, TAM_STRING, stdin);
+
+        printf("\nQuantas tropas: ");
+        scanf("%d", &territorio[i].tropas);
+
+        territorio[i].nome[strcspn(territorio[i].nome, "\n")] = '\0';
+        territorio[i].cor[strcspn(territorio[i].cor, "\n")] = '\0';
+
+        limparBufferEntrada();
+        j++;
+    }
+    return 0;
+}
 // --- Função Principal (main) ---
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
 int main() {
@@ -70,30 +95,13 @@ int main() {
 
     srand(time(NULL));
     
-    struct war *territorio = alocarMapa;
+    struct war *territorio = alocarMapa();
 
     printf("\n========================================\n");
     printf("\tCADASTRO DOS %d TERRITORIOS\n", NUM_TER);
     printf("=========================================\n");
 
-    for(int i = 0; i < NUM_TER; i++)
-    {
-        printf("\n--> TERRITORIO %d", j);
-        printf("\nNome do territorio: ");
-        fgets(territorio[i].nome, TAM_STRING, stdin);
-
-        printf("Cor do exercito: ");
-        fgets(territorio[i].cor, TAM_STRING, stdin);
-
-        printf("Quantidade de tropas: ");
-        scanf("%d", &territorio[i].tropas);
-
-        territorio[i].nome[strcspn(territorio[i].nome, "\n")] = '\0';
-        territorio[i].cor[strcspn(territorio[i].cor, "\n")] = '\0';
-        limparBufferEntrada();
-        j++;
-    }
-
+    
     j=1;
     //exibindo os territorios
     printf("\n\n========================================\n");
