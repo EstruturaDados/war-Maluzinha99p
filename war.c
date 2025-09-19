@@ -107,12 +107,12 @@ void simularAtaque(struct war *territorio, int terri1, int terri2)
     if(num1 > num2)
     {
         territorio[terri2 - 1].tropas -= 1;
-        printf("VITORIA DO ATAQUE! Defesa perdeu 1 tropa\n");
+        printf("\nVITORIA DO ATAQUE! Defesa perdeu 1 tropa\n");
     }
     else if(num2 > num1)
     {
         territorio[terri1 - 1].tropas -= 1;
-        printf("VITORIA DA DEFESA! Ataque perdeu 1 tropa\n");
+        printf("\nVITORIA DA DEFESA! Ataque perdeu 1 tropa\n");
     }
     
 }
@@ -156,7 +156,7 @@ int main() {
         printf("Escolha o territorio do atacante (1 a 5, ou 0 para sair): ");
         scanf("%d", &ataque);
 
-        printf("\nEscolha o territorio de defesa (1 a 5): ");
+        printf("Escolha o territorio de defesa (1 a 5): ");
         scanf("%d", &defesa);
 
         if(ataque > NUM_TER && ataque < 0 && defesa > NUM_TER && defesa < 0)
