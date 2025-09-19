@@ -64,15 +64,15 @@ void inicializarTerritorios(struct war *territorio)
     int j = 1;
     for(int i = 0; i < NUM_TER; i++)
     {
-        printf("--> TERRITORIO %d\n", j);
+        printf("\n--> TERRITORIO %d\n", j);
 
         printf("Nome do territorio: ");
         fgets(territorio[i].nome, TAM_STRING, stdin);
 
-        printf("\nCor do exercito: ");
+        printf("Cor do exercito: ");
         fgets(territorio[i].cor, TAM_STRING, stdin);
 
-        printf("\nQuantas tropas: ");
+        printf("Quantas tropas: ");
         scanf("%d", &territorio[i].tropas);
 
         territorio[i].nome[strcspn(territorio[i].nome, "\n")] = '\0';
@@ -81,7 +81,6 @@ void inicializarTerritorios(struct war *territorio)
         limparBufferEntrada();
         j++;
     }
-    return 0;
 }
 
 void exibirMapa(struct war *territorio)
@@ -92,7 +91,6 @@ void exibirMapa(struct war *territorio)
         printf("%d - %s (Exercito: %s, Tropas: %d)\n", j, territorio[i].nome, territorio[i].cor, territorio[i].tropas);
         j++;
     }
-    return 0;
 }
 // --- Função Principal (main) ---
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
