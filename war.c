@@ -48,7 +48,7 @@ void limparBufferEntrada(){
 
 struct war* alocarMapa()
 {
-    struct war *territorio = (struct territorio*) calloc(NUM_TER, sizeof(struct war));
+    struct war *territorio = (struct war*) calloc(NUM_TER, sizeof(struct war));
 
     if(territorio == NULL)
     {
@@ -62,7 +62,7 @@ struct war* alocarMapa()
 void inicializarTerritorios(struct war *territorio)
 {
     int j = 1;
-    for(int i = 0, i < NUM_TER; i++)
+    for(int i = 0; i < NUM_TER; i++)
     {
         printf("--> TERRITORIO %d\n", j);
 
@@ -120,30 +120,6 @@ int main() {
     printf("=========================================\n");
 
     exibirMapa(territorio);
-    
-    do{
-        for(int i = 0; i < NUM_TER; i++)
-        {
-            printf("%d - %s (Exercito %s, Tropas: %d)\n", i + 1, territorio[i].nome, territorio[i].cor, territorio[i].tropas);
-        }
-
-        printf("----- Fase do Ataque -----");
-
-        printf("Escolha o territorio atacante (1 a 5, ou 0 para sair):");
-        scanf("%d", &terri1);
-        v1 = 1 + rand() %6;
-
-        printf("Escolha o territorio defensor (1 a 5):");
-        scanf("%d", &terri2);
-        v2 = 1 + rand() %6;
-
-        printf("O atacante %s rolou o dado e tirou %d\n", territorio[terri1 - 1].nome, v1);
-        printf("O defensor %s rolou o dado e tirou %d\n", territorio[terri2 - 1].nome, v2);
-
-
-    }while(terri1 != 0);
-    
-
 
     // 2. Laço Principal do Jogo (Game Loop):
     // - Roda em um loop 'do-while' que continua até o jogador sair (opção 0) ou vencer.
