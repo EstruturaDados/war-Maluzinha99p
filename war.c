@@ -23,6 +23,7 @@
 // --- Constantes Globais ---
 // Definem valores fixos para o número de territórios, missões e tamanho máximo de strings, facilitando a manutenção.
 #define TAM_STRING 50
+#define NUM_TER 5
 
 // --- Estrutura de Dados ---
 // Define a estrutura para um território, contendo seu nome, a cor do exército que o domina e o número de tropas.
@@ -45,10 +46,17 @@ void limparBufferEntrada(){
     while((c=getchar()) != '\n' && c != EOF);
 }
 
-void gerarNum()
+struct war* alocarMapa()
 {
-    int num1 = 1 + rand() %6;
-    int num2 = 1 + rand() %6;
+    struct war *territorio = (struct territorio*) calloc(NUM_TER, sizeof(struct war));
+
+    if(territorio == NULL)
+    {
+        printf("Erro no alocamento da memoria");
+        return NULL;
+    }
+
+     return territorio;
 }
 // --- Função Principal (main) ---
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
@@ -62,13 +70,7 @@ int main() {
 
     srand(time(NULL));
     
-    int terri1 = 0, terri2 = 0, indice = 0, NUM_TER = 0, j = 0, v1 = 0, v2 = 0;
-    struct war *territorio;
-
-    printf("Quantos territorios voce deseja: \n");
-    scanf("%d", &NUM_TER);
-
-    territorio = (struct war*) calloc(NUM_TER, sizeof(struct war));
+    struct war *territorio = alocarMapa;
 
     printf("\n========================================\n");
     printf("\tCADASTRO DOS %d TERRITORIOS\n", NUM_TER);
@@ -106,19 +108,19 @@ int main() {
 
         printf("----- Fase do Ataque -----");
 
-        printf("Escolha o territorio atacante (1 a 5, ou 0 para sair): %d\n");
+        printf("Escolha o territorio atacante (1 a 5, ou 0 para sair):");
         scanf("%d", &terri1);
         v1 = 1 + rand() %6;
 
-        printf("Escolha o territorio defensor (1 a 5): %d\n");
+        printf("Escolha o territorio defensor (1 a 5):");
         scanf("%d", &terri2);
         v2 = 1 + rand() %6;
 
-        printf("O atacante %d rolou o dado e tirou %d\n", territorio[terr1 - 1].nome, v1);
-        printf("O defensor %d rolou o dado e tirou %d\n", territorio[terr2 - 1].nome, v2);
+        printf("O atacante %s rolou o dado e tirou %d\n", territorio[terri1 - 1].nome, v1);
+        printf("O defensor %s rolou o dado e tirou %d\n", territorio[terri2 - 1].nome, v2);
 
 
-    }while(terri1 != 0)
+    }while(terri1 != 0);
     
 
 
@@ -133,6 +135,7 @@ int main() {
 
     // 3. Limpeza:
     // - Ao final do jogo, libera a memória alocada para o mapa para evitar vazamentos de memória.
+    free(territorio);
 
     return 0;
 }
