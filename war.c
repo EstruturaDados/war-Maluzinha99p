@@ -86,6 +86,9 @@ void inicializarTerritorios(struct war *territorio)
 
 void exibirMapa(struct war *territorio)
 {
+    printf("\n\n========================================\n");
+    printf("\tMAPA DO MUNDO - ESTADO ATUAL\n");
+    printf("=========================================\n");
     int j = 1;
     for(int i = 0; i < NUM_TER; i++)
     {
@@ -104,12 +107,12 @@ void simularAtaque(struct war *territorio, int terri1, int terri2)
     if(num1 > num2)
     {
         territorio[terri2 - 1].tropas -= 1;
-        printf("VITORIA DO ATAQUE! Defesa perdeu 1 tropa");
+        printf("VITORIA DO ATAQUE! Defesa perdeu 1 tropa\n");
     }
     else if(num2 > num1)
     {
         territorio[terri1 - 1].tropas -= 1;
-        printf("VITORIA DA DEFESA! Ataque perdeu 1 tropa");
+        printf("VITORIA DA DEFESA! Ataque perdeu 1 tropa\n");
     }
     
 }
@@ -137,10 +140,6 @@ int main() {
     inicializarTerritorios(territorio);
     
     //exibindo os territorios
-    printf("\n\n========================================\n");
-    printf("\tMAPA DO MUNDO - ESTADO ATUAL\n");
-    printf("=========================================\n");
-
     exibirMapa(territorio);
 
     // 2. Laço Principal do Jogo (Game Loop):
