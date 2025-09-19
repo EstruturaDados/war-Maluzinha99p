@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <locale.h>
 
 // --- Constantes Globais ---
 // Definem valores fixos para o número de territórios, missões e tamanho máximo de strings, facilitando a manutenção.
@@ -92,6 +93,27 @@ void exibirMapa(struct war *territorio)
         j++;
     }
 }
+
+void simularAtaque(struct war *territorio, int terri1, int terri2)
+{
+    int num1 = 1 + rand() %6;
+    int num2 = 1 + rand() %6;
+
+    printf("\nO atacante %s rolou o dado e tirou: %d", territorio[terri1 - 1].nome, num1);
+    printf("\nO defensor %s rolou o dado e tirou: %d", territorio[terri2 - 1].nome, num2);
+    if(num1 > num2)
+    {
+        territorio[terri2 - 1].tropas -= 1;
+        printf("VITORIA DO ATAQUE! Defesa perdeu 1 tropa");
+    }
+    else if(num2 > num1)
+    {
+        territorio[terri1 - 1].tropas -= 1;
+        printf("VITORIA DA DEFESA! Ataque perdeu 1 tropa");
+    }
+    
+}
+
 // --- Função Principal (main) ---
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
 int main() {
@@ -101,9 +123,11 @@ int main() {
     // - Aloca a memória para o mapa do mundo e verifica se a alocação foi bem-sucedida.
     // - Preenche os territórios com seus dados iniciais (tropas, donos, etc.).
     // - Define a cor do jogador e sorteia sua missão secreta.
-
+    setlocale(LC_ALL, "pt_BR.UTF-8");
     srand(time(NULL));
     
+    int ataque, defesa;
+
     struct war *territorio = alocarMapa();
 
     printf("\n========================================\n");
@@ -127,6 +151,24 @@ int main() {
     //   - Opção 2: Verifica se a condição de vitória foi alcançada e informa o jogador.
     //   - Opção 0: Encerra o jogo.
     // - Pausa a execução para que o jogador possa ler os resultados antes da próxima rodada.
+    do
+    {
+        printf("\n\n----- Fase Ataque -----\n");
+        printf("Escolha o territorio do atacante (1 a 5, ou 0 para sair): ");
+        scanf("%d", &ataque);
+
+        printf("\nEscolha o territorio de defesa (1 a 5): ");
+        scanf("%d", &defesa);
+
+        if(ataque > NUM_TER && ataque < 0 && defesa > NUM_TER && defesa < 0)
+        {
+            printf("Essa opção não é válida! Digite enter para continuar ou 0 para sair.");
+        }
+
+        simularAtaque(territorio, ataque, defesa);
+        exibirMapa(territorio);
+
+    }while(ataque != 0);
 
     // 3. Limpeza:
     // - Ao final do jogo, libera a memória alocada para o mapa para evitar vazamentos de memória.
